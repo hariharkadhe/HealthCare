@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: medicare-pro
+    env: node
+    region: oregon
+    plan: free
+    rootDir: .
+    buildCommand: npm install --prefix server && npm install --prefix client --include=dev && npm run build --prefix client
+    startCommand: NODE_ENV=production npm run start --prefix server
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: PORT
+        value: 10000
+      - key: HOSPITAL_TIMEZONE
+        value: Asia/Kolkata
